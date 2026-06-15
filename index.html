@@ -313,6 +313,113 @@
 
     .artist-card:hover .artist-card-overlay { opacity: 1; }
 
+    /* ─── PREVIEW PLAYER ─── */
+    .card-preview {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.93);
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .artist-card:hover .card-preview {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .preview-header {
+      padding: 20px 20px 14px;
+      border-bottom: 1px solid #1a1a1a;
+    }
+
+    .preview-artist-name {
+      font-size: 11px;
+      color: var(--light-gray);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 6px;
+    }
+
+    .preview-track-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+
+    .preview-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 6px;
+    }
+
+    .preview-hint {
+      font-size: 10px;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .preview-counter {
+      font-size: 10px;
+      color: #555;
+      font-weight: 600;
+    }
+
+    .preview-dots {
+      display: flex;
+      gap: 5px;
+      padding: 10px 20px;
+    }
+
+    .preview-dot {
+      width: 18px;
+      height: 2px;
+      background: #333;
+      transition: background 0.2s, width 0.2s;
+    }
+
+    .preview-dot.active {
+      background: var(--white);
+      width: 28px;
+    }
+
+    .preview-iframe-wrap {
+      flex: 1;
+      overflow: hidden;
+      padding: 0 12px 12px;
+    }
+
+    .preview-iframe-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 4px;
+    }
+
+    .preview-loading {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.6);
+      font-size: 11px;
+      color: var(--light-gray);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .preview-iframe-wrap.loading .preview-loading { opacity: 1; }
+
     .artist-card-info {
       position: absolute;
       bottom: 0; left: 0; right: 0;
@@ -670,19 +777,48 @@
       <h2 class="section-title">Artistes</h2>
     </div>
     <div class="artists-grid">
-      <!-- Carte 1 -->
-      <div class="artist-card">
-        <div class="artist-card-placeholder">A</div>
+      <!-- Carte KABI -->
+      <div class="artist-card" data-embeds='[
+        {"title":"ATTILA","id":"2yDly0F5qORcsXU26E0NN2"},
+        {"title":"KODAK","id":"3TeKljOsPtrzKYJo8Je9Zh"},
+        {"title":"SENGHOR","id":"1fw1OHUhp0tHOqyhjXqcXS"},
+        {"title":"44 Voix","id":"46LIEemD74r2smKzflAyPs"}
+      ]'>
+        <div class="artist-card-placeholder">KABI</div>
         <div class="artist-card-info">
-          <div class="artist-name">Artiste 1</div>
-          <div class="artist-genre">Rap / Drill</div>
+          <div class="artist-name">KABI</div>
+          <div class="artist-genre">Rap</div>
+        </div>
+        <div class="card-preview">
+          <div class="preview-header">
+            <div class="preview-artist-name">KABI</div>
+            <div class="preview-track-name">ATTILA</div>
+            <div class="preview-meta">
+              <span class="preview-hint">↕ Molette pour parcourir</span>
+              <span class="preview-counter">1 / 4</span>
+            </div>
+          </div>
+          <div class="preview-dots">
+            <div class="preview-dot active"></div>
+            <div class="preview-dot"></div>
+            <div class="preview-dot"></div>
+            <div class="preview-dot"></div>
+          </div>
+          <div class="preview-iframe-wrap" id="kabi-iframe-wrap">
+            <div class="preview-loading">Chargement…</div>
+            <iframe id="kabi-iframe"
+              src="https://open.spotify.com/embed/album/2yDly0F5qORcsXU26E0NN2?utm_source=generator&theme=0"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy">
+            </iframe>
+          </div>
         </div>
         <div class="artist-card-overlay">
-          <div class="artist-name">Artiste 1</div>
-          <div class="artist-genre">Rap / Drill</div>
+          <div class="artist-name">KABI</div>
+          <div class="artist-genre">Rap</div>
           <div class="artist-links">
-            <a href="#" class="artist-link">Spotify</a>
-            <a href="#" class="artist-link">Instagram</a>
+            <a href="https://open.spotify.com/intl-fr/artist/0Li0hUVg5NeGxIrvBaSfQM" target="_blank" class="artist-link">Spotify</a>
+            <a href="https://instagram.com/kabi.ctg" target="_blank" class="artist-link">Instagram</a>
           </div>
         </div>
       </div>
@@ -744,52 +880,52 @@
       <h2 class="section-title">Releases</h2>
     </div>
     <div class="releases-list">
-      <div class="release-item">
+      <div class="release-item" onclick="window.open('https://open.spotify.com/album/2yDly0F5qORcsXU26E0NN2','_blank')">
         <div class="release-cover">44</div>
         <div class="release-info">
-          <div class="release-title">Titre du projet</div>
+          <div class="release-title">ATTILA</div>
           <div class="release-meta">
-            <span>Artiste 1</span>
-            <span class="release-tag">Album</span>
-          </div>
-        </div>
-        <div class="release-date">2025</div>
-        <div class="release-arrow">→</div>
-      </div>
-      <div class="release-item">
-        <div class="release-cover">44</div>
-        <div class="release-info">
-          <div class="release-title">Titre du projet</div>
-          <div class="release-meta">
-            <span>Artiste 2</span>
-            <span class="release-tag">EP</span>
-          </div>
-        </div>
-        <div class="release-date">2025</div>
-        <div class="release-arrow">→</div>
-      </div>
-      <div class="release-item">
-        <div class="release-cover">44</div>
-        <div class="release-info">
-          <div class="release-title">Titre du projet</div>
-          <div class="release-meta">
-            <span>Artiste 1, Artiste 3</span>
+            <span>KABI</span>
             <span class="release-tag">Single</span>
           </div>
         </div>
-        <div class="release-date">2024</div>
+        <div class="release-date">2026</div>
         <div class="release-arrow">→</div>
       </div>
-      <div class="release-item">
+      <div class="release-item" onclick="window.open('https://open.spotify.com/album/3TeKljOsPtrzKYJo8Je9Zh','_blank')">
         <div class="release-cover">44</div>
         <div class="release-info">
-          <div class="release-title">Titre du projet</div>
+          <div class="release-title">KODAK</div>
           <div class="release-meta">
-            <span>Artiste 4</span>
-            <span class="release-tag">Album</span>
+            <span>KABI</span>
+            <span class="release-tag">Single</span>
           </div>
         </div>
-        <div class="release-date">2024</div>
+        <div class="release-date">2026</div>
+        <div class="release-arrow">→</div>
+      </div>
+      <div class="release-item" onclick="window.open('https://open.spotify.com/album/1fw1OHUhp0tHOqyhjXqcXS','_blank')">
+        <div class="release-cover">44</div>
+        <div class="release-info">
+          <div class="release-title">SENGHOR</div>
+          <div class="release-meta">
+            <span>KABI</span>
+            <span class="release-tag">Single</span>
+          </div>
+        </div>
+        <div class="release-date">2025</div>
+        <div class="release-arrow">→</div>
+      </div>
+      <div class="release-item" onclick="window.open('https://open.spotify.com/album/46LIEemD74r2smKzflAyPs','_blank')">
+        <div class="release-cover">44</div>
+        <div class="release-info">
+          <div class="release-title">44 Voix</div>
+          <div class="release-meta">
+            <span>KABI</span>
+            <span class="release-tag">Single</span>
+          </div>
+        </div>
+        <div class="release-date">2025</div>
         <div class="release-arrow">→</div>
       </div>
     </div>
@@ -872,6 +1008,42 @@
       });
     }, { threshold: 0.4 });
     sections.forEach(s => observer.observe(s));
+
+    // Preview player — scroll through releases
+    document.querySelectorAll('.artist-card[data-embeds]').forEach(card => {
+      const embeds = JSON.parse(card.dataset.embeds);
+      let current = 0;
+      let cooldown = false;
+
+      const iframe = card.querySelector('iframe');
+      const trackName = card.querySelector('.preview-track-name');
+      const counter = card.querySelector('.preview-counter');
+      const dots = card.querySelectorAll('.preview-dot');
+      const wrap = card.querySelector('.preview-iframe-wrap');
+
+      function loadEmbed(index) {
+        current = (index + embeds.length) % embeds.length;
+        if (trackName) trackName.textContent = embeds[current].title;
+        if (counter) counter.textContent = `${current + 1} / ${embeds.length}`;
+
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+
+        if (wrap) wrap.classList.add('loading');
+        if (iframe) {
+          iframe.src = `https://open.spotify.com/embed/album/${embeds[current].id}?utm_source=generator&theme=0`;
+          iframe.onload = () => { if (wrap) wrap.classList.remove('loading'); };
+        }
+      }
+
+      card.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (cooldown) return;
+        cooldown = true;
+        setTimeout(() => cooldown = false, 600);
+        loadEmbed(e.deltaY > 0 ? current + 1 : current - 1);
+      }, { passive: false });
+    });
   </script>
 </body>
 </html>
