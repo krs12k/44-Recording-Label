@@ -424,6 +424,13 @@
 
     .preview-iframe-wrap.loading .preview-loading { opacity: 1; }
 
+    .preview-social {
+      display: flex;
+      gap: 20px;
+      padding: 12px 20px;
+      border-top: 1px solid #1a1a1a;
+    }
+
     .artist-card-info {
       position: absolute;
       bottom: 0; left: 0; right: 0;
@@ -796,16 +803,8 @@
         </div>
         <div class="card-preview">
           <div class="preview-header">
-            <div style="display:flex;justify-content:space-between;align-items:flex-start;">
-              <div>
-                <div class="preview-artist-name">KABI</div>
-                <div class="preview-track-name">ATTILA</div>
-              </div>
-              <div class="artist-links" style="flex-direction:column;gap:8px;align-items:flex-end;">
-                <a href="https://open.spotify.com/intl-fr/artist/0Li0hUVg5NeGxIrvBaSfQM" target="_blank" class="artist-link">Spotify</a>
-                <a href="https://instagram.com/kabi.ctg" target="_blank" class="artist-link">Instagram</a>
-              </div>
-            </div>
+            <div class="preview-artist-name">KABI</div>
+            <div class="preview-track-name">ATTILA</div>
             <div class="preview-meta">
               <span class="preview-hint">↕ Molette pour parcourir</span>
               <span class="preview-counter">1 / 4</span>
@@ -825,6 +824,10 @@
               loading="lazy">
             </iframe>
           </div>
+          <div class="preview-social">
+            <a href="https://open.spotify.com/intl-fr/artist/0Li0hUVg5NeGxIrvBaSfQM" target="_blank" class="artist-link">Spotify</a>
+            <a href="https://instagram.com/kabi.ctg" target="_blank" class="artist-link">Instagram</a>
+          </div>
         </div>
         <div class="artist-card-overlay">
           <div class="artist-name">KABI</div>
@@ -842,12 +845,14 @@
           <div class="artist-name">Minithai</div>
           <div class="artist-genre">Beatmaker</div>
         </div>
+        <div class="card-preview" style="justify-content:flex-end;">
+          <div class="preview-social">
+            <a href="https://www.youtube.com/@minithaiproduction" target="_blank" class="artist-link">YouTube</a>
+          </div>
+        </div>
         <div class="artist-card-overlay">
           <div class="artist-name">Minithai</div>
           <div class="artist-genre">Beatmaker</div>
-          <div class="artist-links">
-            <a href="https://www.youtube.com/@minithaiproduction" target="_blank" class="artist-link">YouTube</a>
-          </div>
         </div>
       </div>
       <!-- Carte 3 -->
