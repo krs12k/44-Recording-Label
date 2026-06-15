@@ -313,6 +313,9 @@
 
     .artist-card:hover .artist-card-overlay { opacity: 1; }
 
+    .artist-card-overlay { pointer-events: none; }
+    .artist-card-overlay .artist-links { pointer-events: all; }
+
     /* ─── PREVIEW PLAYER ─── */
     .card-preview {
       position: absolute;
@@ -791,8 +794,16 @@
         </div>
         <div class="card-preview">
           <div class="preview-header">
-            <div class="preview-artist-name">KABI</div>
-            <div class="preview-track-name">ATTILA</div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+              <div>
+                <div class="preview-artist-name">KABI</div>
+                <div class="preview-track-name">ATTILA</div>
+              </div>
+              <div class="artist-links" style="flex-direction:column;gap:8px;align-items:flex-end;">
+                <a href="https://open.spotify.com/intl-fr/artist/0Li0hUVg5NeGxIrvBaSfQM" target="_blank" class="artist-link">Spotify</a>
+                <a href="https://instagram.com/kabi.ctg" target="_blank" class="artist-link">Instagram</a>
+              </div>
+            </div>
             <div class="preview-meta">
               <span class="preview-hint">↕ Molette pour parcourir</span>
               <span class="preview-counter">1 / 4</span>
