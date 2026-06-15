@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>44 — Recording & Production Label</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #000000;
+      --white: #ffffff;
+      --gray: #111111;
+      --mid-gray: #222222;
+      --light-gray: #888888;
+      --border: #2a2a2a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--white); }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 48px;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+
+    .nav-logo-box {
+      width: 40px;
+      height: 40px;
+      border: 2px solid var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+
+    .nav-logo-text {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--light-gray);
+      line-height: 1.3;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--light-gray);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .nav-burger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      transition: all 0.3s;
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 120px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-number {
+      position: absolute;
+      font-size: clamp(300px, 50vw, 600px);
+      font-weight: 700;
+      color: rgba(255,255,255,0.03);
+      user-select: none;
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    .hero-label-box {
+      border: 2px solid var(--white);
+      padding: 32px 40px 28px;
+      position: relative;
+      margin-bottom: 64px;
+    }
+
+    .hero-label-small {
+      position: absolute;
+      top: 10px;
+      left: 14px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--light-gray);
+    }
+
+    .hero-number {
+      font-size: clamp(80px, 14vw, 160px);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-tagline {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--light-gray);
+      text-align: left;
+      letter-spacing: 0.02em;
+      line-height: 1.5;
+      margin-top: 12px;
+    }
+
+    .hero-headline {
+      font-size: clamp(13px, 1.5vw, 16px);
+      font-weight: 400;
+      color: var(--light-gray);
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      margin-bottom: 24px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-white {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    .btn-white:hover {
+      background: var(--light-gray);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--white);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--light-gray);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: var(--light-gray);
+      animation: scrollAnim 1.8s ease-in-out infinite;
+    }
+
+    @keyframes scrollAnim {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.5); transform-origin: top; }
+      50% { opacity: 1; transform: scaleY(1); }
+    }
+
+    /* ─── SECTIONS ─── */
+    section {
+      padding: 120px 48px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      margin-bottom: 64px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+    }
+
+    .section-number {
+      font-size: 11px;
+      color: var(--light-gray);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+    }
+
+    .section-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    /* ─── ARTISTS ─── */
+    #artists { background: var(--black); }
+
+    .artists-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2px;
+    }
+
+    .artist-card {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      background: var(--gray);
+      cursor: pointer;
+    }
+
+    .artist-card-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 80px;
+      font-weight: 700;
+      color: var(--mid-gray);
+      letter-spacing: -0.05em;
+      user-select: none;
+    }
+
+    .artist-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, transparent 60%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .artist-card:hover .artist-card-overlay { opacity: 1; }
+
+    .artist-card-info {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 28px;
+      background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+    }
+
+    .artist-name {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .artist-genre {
+      font-size: 11px;
+      color: var(--light-gray);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-top: 4px;
+    }
+
+    .artist-links {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .artist-link {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--white);
+      text-decoration: none;
+      border-bottom: 1px solid var(--white);
+      padding-bottom: 2px;
+    }
+
+    /* ─── RELEASES ─── */
+    #releases { background: var(--gray); }
+
+    .releases-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .release-item {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      align-items: center;
+      gap: 28px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .release-item:hover { padding-left: 8px; }
+    .release-item:first-child { border-top: 1px solid var(--border); }
+
+    .release-cover {
+      width: 80px;
+      height: 80px;
+      background: var(--mid-gray);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--border);
+      flex-shrink: 0;
+    }
+
+    .release-info { min-width: 0; }
+
+    .release-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .release-meta {
+      font-size: 12px;
+      color: var(--light-gray);
+      margin-top: 4px;
+      display: flex;
+      gap: 16px;
+    }
+
+    .release-tag {
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 10px;
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+    }
+
+    .release-date {
+      font-size: 12px;
+      color: var(--light-gray);
+      white-space: nowrap;
+      text-align: right;
+    }
+
+    .release-arrow {
+      font-size: 20px;
+      color: var(--light-gray);
+      transition: transform 0.2s;
+    }
+
+    .release-item:hover .release-arrow { transform: translateX(4px); color: var(--white); }
+
+    /* ─── NEWS ─── */
+    #news { background: var(--black); }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2px;
+    }
+
+    .news-card {
+      background: var(--gray);
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+
+    .news-card:hover { background: var(--mid-gray); }
+
+    .news-card-date {
+      font-size: 10px;
+      color: var(--light-gray);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 20px;
+    }
+
+    .news-card-title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .news-card-excerpt {
+      font-size: 14px;
+      color: var(--light-gray);
+      line-height: 1.6;
+    }
+
+    .news-card-link {
+      display: inline-block;
+      margin-top: 24px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--white);
+      text-decoration: none;
+      border-bottom: 1px solid var(--white);
+      padding-bottom: 2px;
+    }
+
+    .news-card-number {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      font-size: 80px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.04);
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    /* ─── CONTACT BAND ─── */
+    #contact {
+      background: var(--white);
+      color: var(--black);
+      padding: 100px 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 32px;
+    }
+
+    .contact-eyebrow {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: #666;
+    }
+
+    .contact-title {
+      font-size: clamp(36px, 6vw, 72px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    .contact-sub {
+      font-size: 15px;
+      color: #555;
+      max-width: 480px;
+      line-height: 1.6;
+    }
+
+    .btn-black {
+      background: var(--black);
+      color: var(--white);
+      padding: 16px 40px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s;
+    }
+
+    .btn-black:hover { background: #333; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--black);
+      border-top: 1px solid var(--border);
+      padding: 40px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-logo-box {
+      width: 32px;
+      height: 32px;
+      border: 1.5px solid var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .footer-copy {
+      font-size: 11px;
+      color: var(--light-gray);
+      letter-spacing: 0.05em;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-socials a {
+      font-size: 11px;
+      color: var(--light-gray);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: color 0.2s;
+    }
+
+    .footer-socials a:hover { color: var(--white); }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 73px; left: 0; right: 0;
+        background: var(--black);
+        padding: 32px 24px;
+        border-top: 1px solid var(--border);
+        gap: 24px;
+      }
+      .nav-burger { display: flex; }
+
+      section { padding: 80px 24px; }
+      #hero { padding: 100px 24px 80px; }
+
+      .artists-grid { grid-template-columns: 1fr 1fr; }
+
+      .release-item {
+        grid-template-columns: 60px 1fr;
+      }
+      .release-date { display: none; }
+
+      .news-grid { grid-template-columns: 1fr; }
+
+      footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">
+      <div class="nav-logo-box">44</div>
+      <span class="nav-logo-text">Recording &<br>Production Label</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#artists">Artistes</a></li>
+      <li><a href="#releases">Releases</a></li>
+      <li><a href="#news">Actualités</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-burger" id="burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg-number">44</div>
+    <p class="hero-headline">Rap · Paris</p>
+    <div class="hero-label-box">
+      <span class="hero-label-small">44</span>
+      <div class="hero-number">44</div>
+      <div class="hero-tagline">Recording & Production<br>Label</div>
+    </div>
+    <div class="hero-cta">
+      <a href="#releases" class="btn btn-white">Nos releases</a>
+      <a href="#artists" class="btn btn-outline">Nos artistes</a>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ARTISTS -->
+  <section id="artists">
+    <div class="section-header">
+      <span class="section-number">01</span>
+      <h2 class="section-title">Artistes</h2>
+    </div>
+    <div class="artists-grid">
+      <!-- Carte 1 -->
+      <div class="artist-card">
+        <div class="artist-card-placeholder">A</div>
+        <div class="artist-card-info">
+          <div class="artist-name">Artiste 1</div>
+          <div class="artist-genre">Rap / Drill</div>
+        </div>
+        <div class="artist-card-overlay">
+          <div class="artist-name">Artiste 1</div>
+          <div class="artist-genre">Rap / Drill</div>
+          <div class="artist-links">
+            <a href="#" class="artist-link">Spotify</a>
+            <a href="#" class="artist-link">Instagram</a>
+          </div>
+        </div>
+      </div>
+      <!-- Carte 2 -->
+      <div class="artist-card">
+        <div class="artist-card-placeholder">B</div>
+        <div class="artist-card-info">
+          <div class="artist-name">Artiste 2</div>
+          <div class="artist-genre">Trap / R&B</div>
+        </div>
+        <div class="artist-card-overlay">
+          <div class="artist-name">Artiste 2</div>
+          <div class="artist-genre">Trap / R&B</div>
+          <div class="artist-links">
+            <a href="#" class="artist-link">Spotify</a>
+            <a href="#" class="artist-link">Instagram</a>
+          </div>
+        </div>
+      </div>
+      <!-- Carte 3 -->
+      <div class="artist-card">
+        <div class="artist-card-placeholder">C</div>
+        <div class="artist-card-info">
+          <div class="artist-name">Artiste 3</div>
+          <div class="artist-genre">Rap / Cloud</div>
+        </div>
+        <div class="artist-card-overlay">
+          <div class="artist-name">Artiste 3</div>
+          <div class="artist-genre">Rap / Cloud</div>
+          <div class="artist-links">
+            <a href="#" class="artist-link">Spotify</a>
+            <a href="#" class="artist-link">Instagram</a>
+          </div>
+        </div>
+      </div>
+      <!-- Carte 4 -->
+      <div class="artist-card">
+        <div class="artist-card-placeholder">D</div>
+        <div class="artist-card-info">
+          <div class="artist-name">Artiste 4</div>
+          <div class="artist-genre">Rap / Boom Bap</div>
+        </div>
+        <div class="artist-card-overlay">
+          <div class="artist-name">Artiste 4</div>
+          <div class="artist-genre">Rap / Boom Bap</div>
+          <div class="artist-links">
+            <a href="#" class="artist-link">Spotify</a>
+            <a href="#" class="artist-link">Instagram</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RELEASES -->
+  <section id="releases">
+    <div class="section-header">
+      <span class="section-number">02</span>
+      <h2 class="section-title">Releases</h2>
+    </div>
+    <div class="releases-list">
+      <div class="release-item">
+        <div class="release-cover">44</div>
+        <div class="release-info">
+          <div class="release-title">Titre du projet</div>
+          <div class="release-meta">
+            <span>Artiste 1</span>
+            <span class="release-tag">Album</span>
+          </div>
+        </div>
+        <div class="release-date">2025</div>
+        <div class="release-arrow">→</div>
+      </div>
+      <div class="release-item">
+        <div class="release-cover">44</div>
+        <div class="release-info">
+          <div class="release-title">Titre du projet</div>
+          <div class="release-meta">
+            <span>Artiste 2</span>
+            <span class="release-tag">EP</span>
+          </div>
+        </div>
+        <div class="release-date">2025</div>
+        <div class="release-arrow">→</div>
+      </div>
+      <div class="release-item">
+        <div class="release-cover">44</div>
+        <div class="release-info">
+          <div class="release-title">Titre du projet</div>
+          <div class="release-meta">
+            <span>Artiste 1, Artiste 3</span>
+            <span class="release-tag">Single</span>
+          </div>
+        </div>
+        <div class="release-date">2024</div>
+        <div class="release-arrow">→</div>
+      </div>
+      <div class="release-item">
+        <div class="release-cover">44</div>
+        <div class="release-info">
+          <div class="release-title">Titre du projet</div>
+          <div class="release-meta">
+            <span>Artiste 4</span>
+            <span class="release-tag">Album</span>
+          </div>
+        </div>
+        <div class="release-date">2024</div>
+        <div class="release-arrow">→</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWS -->
+  <section id="news">
+    <div class="section-header">
+      <span class="section-number">03</span>
+      <h2 class="section-title">Actualités</h2>
+    </div>
+    <div class="news-grid">
+      <div class="news-card">
+        <div class="news-card-number">01</div>
+        <div class="news-card-date">Juin 2025</div>
+        <h3 class="news-card-title">Titre de l'actualité</h3>
+        <p class="news-card-excerpt">Description courte de l'événement ou de l'annonce. Nouveau projet, concert, collaboration ou toute autre actualité du label.</p>
+        <a href="#" class="news-card-link">Lire la suite</a>
+      </div>
+      <div class="news-card">
+        <div class="news-card-number">02</div>
+        <div class="news-card-date">Mai 2025</div>
+        <h3 class="news-card-title">Titre de l'actualité</h3>
+        <p class="news-card-excerpt">Description courte de l'événement ou de l'annonce. Nouveau projet, concert, collaboration ou toute autre actualité du label.</p>
+        <a href="#" class="news-card-link">Lire la suite</a>
+      </div>
+      <div class="news-card">
+        <div class="news-card-number">03</div>
+        <div class="news-card-date">Avril 2025</div>
+        <h3 class="news-card-title">Titre de l'actualité</h3>
+        <p class="news-card-excerpt">Description courte de l'événement ou de l'annonce. Nouveau projet, concert, collaboration ou toute autre actualité du label.</p>
+        <a href="#" class="news-card-link">Lire la suite</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="contact-eyebrow">44 Recording & Production Label</p>
+    <h2 class="contact-title">Travaillons<br>ensemble.</h2>
+    <p class="contact-sub">Artiste en recherche de label, beatmaker, booker ou partenaire — on est à l'écoute.</p>
+    <a href="mailto:contact@44label.com" class="btn-black">Nous contacter</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">
+      <div class="footer-logo-box">44</div>
+      <span class="footer-copy">© 2025 — 44 Recording & Production Label</span>
+    </div>
+    <div class="footer-socials">
+      <a href="#">Instagram</a>
+      <a href="#">Spotify</a>
+      <a href="#">YouTube</a>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu
+    const burger = document.getElementById('burger');
+    const navLinks = document.getElementById('navLinks');
+    burger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    // Nav active on scroll
+    const sections = document.querySelectorAll('section[id], #hero');
+    const navAnchors = document.querySelectorAll('.nav-links a');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navAnchors.forEach(a => {
+            a.style.color = a.getAttribute('href') === '#' + e.target.id
+              ? '#ffffff' : '';
+          });
+        }
+      });
+    }, { threshold: 0.4 });
+    sections.forEach(s => observer.observe(s));
+  </script>
+</body>
+</html>
